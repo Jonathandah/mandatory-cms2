@@ -5,21 +5,20 @@ import axios from "axios";
 const Token = "71576f2b35b3422c108c0e508058a3";
 
 function Main(props) {
+  const checkbox = props.checkbox;
   const getProduct = props.getProduct;
   const searchItem = props.searchItem;
   const [products, updateProducts] = useState([]);
-
+  /*
   useEffect(() => {
     getProducts();
-    console.log("hej");
   }, []);
-
+*/
   useEffect(() => {
     getProducts();
-  }, [searchItem]);
+  }, [searchItem, checkbox]);
 
   function items(product) {
-    console.log(product);
     return (
       <li key={product._id} className="Main__list__item">
         <img
@@ -41,12 +40,15 @@ function Main(props) {
   }
 
   function getProducts() {
+    let regexStock = "";
+    if (checkbox) regexStock = "^[1-9]d*";
     axios
       .post(
         `http://localhost:8081/api/collections/get/Products?token=${Token}`,
         {
           filter: {
-            Name: { $regex: searchItem }
+            Name: { $regex: searchItem },
+            Stock: { $regex: regexStock }
           }
         }
       )

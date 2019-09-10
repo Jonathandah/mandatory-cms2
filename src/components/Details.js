@@ -3,7 +3,6 @@ import "../css/Details.css";
 
 function Details(props) {
   const product = props.product.data.entries[0];
-  console.log(product);
 
   return (
     <div className="Details">

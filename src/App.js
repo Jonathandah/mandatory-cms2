@@ -9,6 +9,7 @@ import Search from "./components/Search";
 function App() {
   const [product, updateProduct] = useState({});
   const [searchItem, updateSearchItem] = useState("");
+  const [checkbox, updateCheckbox] = useState(false);
 
   function getProduct(id) {
     axios
@@ -16,7 +17,6 @@ function App() {
         `http://localhost:8081/api/collections/get/Products?token=71576f2b35b3422c108c0e508058a3&filter[_id]=${id}`
       )
       .then(response => {
-        console.log(response);
         updateProduct(response);
       })
       .catch(error => console.log(error));
@@ -27,13 +27,20 @@ function App() {
       <div className="App">
         <header className="App__header">
           <h1 className="App__header__title">Peachit</h1>
-          <Search updateSearchItem={updateSearchItem} />
+          <Search
+            updateCheckbox={updateCheckbox}
+            updateSearchItem={updateSearchItem}
+          />
         </header>
         <Route
           exact
           path="/"
           render={() => (
-            <Main searchItem={searchItem} getProduct={getProduct} />
+            <Main
+              searchItem={searchItem}
+              getProduct={getProduct}
+              checkbox={checkbox}
+            />
           )}
         />
         {!product.data ? null : (
