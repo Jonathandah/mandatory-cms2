@@ -1,0 +1,23 @@
+.Main {
+  width: 100%;
+  height: 100%;
+}
+
+.Main__list {
+  display: flex;
+  flex-direction: row;
+}
+.Main__list__item {
+  list-style: none;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5%;
+  border: 1px solid black;
+  border-radius: 5%;
+}
+.Main__list__item__image {
+  width: 80%;
+}

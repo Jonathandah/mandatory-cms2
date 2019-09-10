@@ -18,7 +18,7 @@ function Main(props) {
     return (
       <li key={product._id} className="Main__list__item">
         <img
-          src={"https://localhost8081/" + product.Image.path}
+          src={"http://localhost:8081/" + product.Image.path}
           allt={`this is a ${product.Name}`}
           className="Main__list__item__image"
         />
@@ -49,7 +49,7 @@ function Main(props) {
 
   return (
     <div className="Main">
-      <p>main side</p>
+      <p className="main__page">main side</p>
       <ul className="Main__list">{products.map(i => items(i))}</ul>
     </div>
   );

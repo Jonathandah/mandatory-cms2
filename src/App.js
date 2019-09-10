@@ -24,20 +24,16 @@ function App() {
     <Router>
       <div className="App">
         <header className="App__header"></header>
-        <Route exact path="/" component={Main} />
-        <Route
-          path="/details/:id"
-          render={() => (
-            <Details
-              render={() => (
-                <Main getProduct={getProduct} />
-              )} /*product={product}*/
-            />
-          )}
-        />
+        <Route exact path="/" render={() => <Main getProduct={getProduct} />} />
+        {!product.data ? null : (
+          <Route
+            path="/details/:id"
+            render={() => <Details product={product} />}
+          />
+        )}
       </div>
     </Router>
   );
 }
-//render={() => <Main getProduct={getProduct} />}
+
 export default App;
