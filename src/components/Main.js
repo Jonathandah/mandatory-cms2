@@ -2,16 +2,21 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../css/Main.css";
 import axios from "axios";
+const Token = "71576f2b35b3422c108c0e508058a3";
 
 function Main(props) {
   const getProduct = props.getProduct;
+  const searchItem = props.searchItem;
   const [products, updateProducts] = useState([]);
-  let test = 0;
 
   useEffect(() => {
     getProducts();
     console.log("hej");
   }, []);
+
+  useEffect(() => {
+    getProducts();
+  }, [searchItem]);
 
   function items(product) {
     console.log(product);
@@ -37,8 +42,13 @@ function Main(props) {
 
   function getProducts() {
     axios
-      .get(
-        `http://localhost:8081/api/collections/get/Products?token=71576f2b35b3422c108c0e508058a3`
+      .post(
+        `http://localhost:8081/api/collections/get/Products?token=${Token}`,
+        {
+          filter: {
+            Name: { $regex: searchItem }
+          }
+        }
       )
       .then(response => {
         console.log(response);

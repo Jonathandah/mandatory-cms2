@@ -4,9 +4,11 @@ import axios from "axios";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import Main from "./components/Main";
 import Details from "./components/Details";
+import Search from "./components/Search";
 
 function App() {
   const [product, updateProduct] = useState({});
+  const [searchItem, updateSearchItem] = useState("");
 
   function getProduct(id) {
     axios
@@ -23,8 +25,17 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <header className="App__header"></header>
-        <Route exact path="/" render={() => <Main getProduct={getProduct} />} />
+        <header className="App__header">
+          <h1 className="App__header__title">Peachit</h1>
+          <Search updateSearchItem={updateSearchItem} />
+        </header>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <Main searchItem={searchItem} getProduct={getProduct} />
+          )}
+        />
         {!product.data ? null : (
           <Route
             path="/details/:id"
