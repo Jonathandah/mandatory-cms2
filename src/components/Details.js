@@ -1,7 +1,9 @@
 import React from "react";
-import "./css/Details.css";
+import "../css/Details.css";
 
-function Details() {
+function Details(props) {
+  const product = props.product;
+  console.log(product);
   return <div className="Details"></div>;
 }
 
