@@ -9,11 +9,7 @@ function Main(props) {
   const getProduct = props.getProduct;
   const searchItem = props.searchItem;
   const [products, updateProducts] = useState([]);
-  /*
-  useEffect(() => {
-    getProducts();
-  }, []);
-*/
+
   useEffect(() => {
     getProducts();
   }, [searchItem, checkbox]);

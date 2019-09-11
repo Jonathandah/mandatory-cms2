@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./css/App.css";
 import axios from "axios";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import Main from "./components/Main";
 import Details from "./components/Details";
 import Search from "./components/Search";
+import Cart from "./components/Cart";
+import { items$, updateItems } from "./store/cart-store";
 
 function App() {
   const [product, updateProduct] = useState({});
@@ -26,7 +28,10 @@ function App() {
     <Router>
       <div className="App">
         <header className="App__header">
-          <h1 className="App__header__title">Peachit</h1>
+          <Link to="/" className="App__header__title">
+            Peachit
+          </Link>
+          <Link to="/cart">Cart</Link>
           <Search
             updateCheckbox={updateCheckbox}
             updateSearchItem={updateSearchItem}
@@ -49,6 +54,7 @@ function App() {
             render={() => <Details product={product} />}
           />
         )}
+        <Route path="/cart" component={Cart} />
       </div>
     </Router>
   );
