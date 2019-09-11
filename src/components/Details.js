@@ -28,6 +28,8 @@ function Details(props) {
         <button
           className="Details__body__add"
           onClick={_ => {
+            //borde jag lägga alla produkter i ett objekt istället för array? För att hitta produkterna enklare
+            //bara genom att ange key.
             let item = {
               product,
               amount: parseInt(amount)
