@@ -36,13 +36,21 @@ function Details(props) {
             };
 
             if (items$.value) {
-              let copyCart = [...items$.value];
-              copyCart.push(item);
+              let copyCart = { ...items$.value };
+              if (copyCart[product.Name]) {
+                //om produkten finns
+                copyCart[product.Name].amount += item.amount;
+                console.log(copyCart);
+              } else {
+                //om produkten inte finns
+                copyCart[product.Name] = item;
+                console.log(copyCart);
+              }
               updateItems(copyCart);
             } else {
-              let array = [];
-              array.push(item);
-              updateItems(array);
+              let obj = {};
+              obj[product.Name] = item;
+              updateItems(obj);
             }
 
             console.log(items$.value);
