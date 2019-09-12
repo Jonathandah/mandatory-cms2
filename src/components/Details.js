@@ -5,6 +5,7 @@ import { items$, updateItems } from "../store/cart-store";
 function Details(props) {
   const [amount, updateAmount] = useState(1);
   const product = props.product.data.entries[0];
+  const addToCart = props.addToCart;
 
   return (
     <div className="Details">
@@ -34,26 +35,26 @@ function Details(props) {
               product,
               amount: parseInt(amount)
             };
-
+            console.log("before", items$.value);
             if (items$.value) {
               let copyCart = { ...items$.value };
               if (copyCart[product.Name]) {
                 //om produkten finns
                 copyCart[product.Name].amount += item.amount;
-                console.log(copyCart);
               } else {
                 //om produkten inte finns
                 copyCart[product.Name] = item;
-                console.log(copyCart);
               }
               updateItems(copyCart);
+              addToCart(); // kan man använda useEffect isället?
             } else {
               let obj = {};
               obj[product.Name] = item;
               updateItems(obj);
+              addToCart();
             }
 
-            console.log(items$.value);
+            console.log("after", items$.value);
           }}
         >
           Add to cart

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/App.css";
 import axios from "axios";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
@@ -12,6 +12,7 @@ function App() {
   const [product, updateProduct] = useState({});
   const [searchItem, updateSearchItem] = useState("");
   const [checkbox, updateCheckbox] = useState(false);
+  const [cartAmount, updateCartAmount] = useState(0);
 
   function getProduct(id) {
     axios
@@ -24,6 +25,24 @@ function App() {
       .catch(error => console.log(error));
   }
 
+  /*
+  useEffect(() => {
+    let number = 0;
+    for (let _ in items$.value) {
+      number++;
+      updateCartAmount(number);
+    }
+  }, [updateItems]);
+*/
+
+  function addToCart() {
+    let number = 0;
+    for (let _ in items$.value) {
+      number++;
+      updateCartAmount(number);
+    }
+  }
+
   return (
     <Router>
       <div className="App">
@@ -32,6 +51,7 @@ function App() {
             Peachit
           </Link>
           <Link to="/cart">Cart</Link>
+          <p>{cartAmount}</p>
           <Search
             updateCheckbox={updateCheckbox}
             updateSearchItem={updateSearchItem}
@@ -51,7 +71,7 @@ function App() {
         {!product.data ? null : (
           <Route
             path="/details/:id"
-            render={() => <Details product={product} />}
+            render={() => <Details product={product} addToCart={addToCart} />}
           />
         )}
         <Route path="/cart" component={Cart} />
