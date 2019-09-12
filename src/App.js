@@ -51,7 +51,7 @@ function App() {
             Peachit
           </Link>
           <Link to="/cart">Cart</Link>
-          <p>{cartAmount}</p>
+          <p className="App__header__cart">{cartAmount}</p>
           <Search
             updateCheckbox={updateCheckbox}
             updateSearchItem={updateSearchItem}
