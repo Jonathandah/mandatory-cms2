@@ -6,6 +6,7 @@ import Main from "./components/Main";
 import Details from "./components/Details";
 import Search from "./components/Search";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 import { items$, updateItems } from "./store/cart-store";
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
           />
         )}
         <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
       </div>
     </Router>
   );

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../css/Cart.css";
 import { items$, updateItems } from "../store/cart-store";
+import { Redirect } from "react-router-dom";
 
 function listItem(item) {
   let product = item.product;
-  console.log(item);
-  console.log("item amount", item.amount);
-  console.log("price", product.Price);
+
   let total = item.amount * product.Price;
   return (
     <li className="Cart__list__item" key={product._id}>
@@ -21,12 +20,56 @@ function listItem(item) {
     </li>
   );
 }
+
+function postOrder(e, updateFinishOrder, info) {
+  //api for posting order to cockpit
+  e.preventDefault();
+  updateFinishOrder(true);
+  console.log(info.adress);
+  console.log(info.name);
+  return <Redirect to="/checkout" />;
+}
+
 function Cart() {
+  const [finishOrder, updateFinishOrder] = useState(false);
+  const [name, updateName] = useState("");
+  const [adress, updateAdress] = useState("");
+
   return (
     <div className="Cart">
       <ul className="Cart__list">
         {Object.keys(items$.value).map(key => listItem(items$.value[key]))}
       </ul>
+      <form
+        className="Cart__form"
+        onSubmit={e => {
+          postOrder(e, updateFinishOrder, { name, adress });
+        }}
+      >
+        <p className="Cart__form__text">Name</p>
+        <input
+          className="Cart__form__input"
+          typ="text"
+          onChange={e => {
+            updateName(e.target.value);
+          }}
+          value={name}
+          required
+        />
+        <p className="Cart__form__text">Adress</p>
+        <input
+          className="Cart__form__input"
+          typ="text"
+          onChange={e => {
+            updateAdress(e.target.value);
+          }}
+          value={adress}
+          required
+        />
+        <button className="Cart__form__submit" type="submit">
+          Confirm
+        </button>
+      </form>
     </div>
   );
 }
