@@ -25,15 +25,9 @@ function App() {
       .catch(error => console.log(error));
   }
 
-  /*
   useEffect(() => {
-    let number = 0;
-    for (let _ in items$.value) {
-      number++;
-      updateCartAmount(number);
-    }
-  }, [updateItems]);
-*/
+    addToCart();
+  }, []);
 
   function addToCart() {
     let number = 0;
