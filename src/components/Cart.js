@@ -27,7 +27,6 @@ function postOrder(e, updateFinishOrder, info) {
   updateFinishOrder(true);
   console.log(info.adress);
   console.log(info.name);
-  return <Redirect to="/checkout" />;
 }
 
 function Cart() {
@@ -36,41 +35,47 @@ function Cart() {
   const [adress, updateAdress] = useState("");
 
   return (
-    <div className="Cart">
-      <ul className="Cart__list">
-        {Object.keys(items$.value).map(key => listItem(items$.value[key]))}
-      </ul>
-      <form
-        className="Cart__form"
-        onSubmit={e => {
-          postOrder(e, updateFinishOrder, { name, adress });
-        }}
-      >
-        <p className="Cart__form__text">Name</p>
-        <input
-          className="Cart__form__input"
-          typ="text"
-          onChange={e => {
-            updateName(e.target.value);
-          }}
-          value={name}
-          required
-        />
-        <p className="Cart__form__text">Adress</p>
-        <input
-          className="Cart__form__input"
-          typ="text"
-          onChange={e => {
-            updateAdress(e.target.value);
-          }}
-          value={adress}
-          required
-        />
-        <button className="Cart__form__submit" type="submit">
-          Confirm
-        </button>
-      </form>
-    </div>
+    <>
+      {finishOrder ? (
+        <Redirect to="/checkout" />
+      ) : (
+        <div className="Cart">
+          <ul className="Cart__list">
+            {Object.keys(items$.value).map(key => listItem(items$.value[key]))}
+          </ul>
+          <form
+            className="Cart__form"
+            onSubmit={e => {
+              postOrder(e, updateFinishOrder, { name, adress });
+            }}
+          >
+            <p className="Cart__form__text">Name</p>
+            <input
+              className="Cart__form__input"
+              typ="text"
+              onChange={e => {
+                updateName(e.target.value);
+              }}
+              value={name}
+              required
+            />
+            <p className="Cart__form__text">Adress</p>
+            <input
+              className="Cart__form__input"
+              typ="text"
+              onChange={e => {
+                updateAdress(e.target.value);
+              }}
+              value={adress}
+              required
+            />
+            <button className="Cart__form__submit" type="submit">
+              Confirm
+            </button>
+          </form>
+        </div>
+      )}
+    </>
   );
 }
 
