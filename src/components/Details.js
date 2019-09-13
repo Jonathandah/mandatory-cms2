@@ -46,12 +46,12 @@ function Details(props) {
                 copyCart[product.Name] = item;
               }
               updateItems(copyCart);
-              addToCart(); // kan man använda useEffect isället?
+              //addToCart(); // kan man använda useEffect isället?
             } else {
               let obj = {};
               obj[product.Name] = item;
               updateItems(obj);
-              addToCart();
+              //addToCart();
             }
 
             console.log("after", items$.value);

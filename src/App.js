@@ -8,6 +8,7 @@ import Search from "./components/Search";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import { items$, updateItems } from "./store/cart-store";
+//import { cockpit__Api } from "./constants/cockpit-api";
 
 function App() {
   const [product, updateProduct] = useState({});
@@ -18,6 +19,10 @@ function App() {
   function getProduct(id) {
     axios
       .get(
+        /*
+        cockpit__Api.products,
+        { filter: { id } }
+        */
         `http://localhost:8081/api/collections/get/Products?token=71576f2b35b3422c108c0e508058a3&filter[_id]=${id}`
       )
       .then(response => {
@@ -27,11 +32,14 @@ function App() {
   }
 
   useEffect(() => {
-    addToCart();
-  }, []);
+    items$.subscribe(_ => {
+      addToCart();
+    });
+  });
 
   function addToCart() {
     let number = 0;
+
     for (let _ in items$.value) {
       number++;
       updateCartAmount(number);
