@@ -1,29 +1,9 @@
 import React, { useState, useEffect } from "react";
+import Item from "./Item";
 import { Link } from "react-router-dom";
 import "../css/Main.css";
 import axios from "axios";
 const Token = "71576f2b35b3422c108c0e508058a3";
-
-function items(product, getProduct) {
-  return (
-    <li key={product._id} className="Main__list__item">
-      <img
-        src={"http://localhost:8081/" + product.Image.path}
-        allt={`this is a ${product.Name}`}
-        className="Main__list__item__image"
-      />
-      <h3 className="Main__list__item__name">{product.Name}</h3>
-      <p className="Main__list__item__price">Price: {product.Price}$</p>
-      <p className="Main__list__item__stock">Stock: {product.Stock}</p>
-      <Link
-        to={`/details/${product.Name}`}
-        onClick={() => getProduct(product._id)}
-      >
-        Go to..
-      </Link>
-    </li>
-  );
-}
 
 function Main(props) {
   const checkbox = props.checkbox;
@@ -76,7 +56,11 @@ function Main(props) {
   return (
     <div className="Main">
       <p className="main__page">main side</p>
-      <ul className="Main__list">{products.map(i => items(i, getProduct))}</ul>
+      <ul className="Main__list">
+        {products.map(i => (
+          <Item key={i._id} product={i} getProduct={getProduct} />
+        ))}
+      </ul>
       <div className="Main__pageContainer__button">
         <button
           className="Main__pageContainer__button"

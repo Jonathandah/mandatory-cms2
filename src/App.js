@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./css/App.css";
-import axios from "axios";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import Main from "./components/Main";
 import Details from "./components/Details";
@@ -15,21 +14,6 @@ function App() {
   const [searchItem, updateSearchItem] = useState("");
   const [checkbox, updateCheckbox] = useState(false);
   const [cartAmount, updateCartAmount] = useState(0);
-
-  function getProduct(id) {
-    axios
-      .get(
-        /*
-        cockpit__Api.products,
-        { filter: { id } }
-        */
-        `http://localhost:8081/api/collections/get/Products?token=71576f2b35b3422c108c0e508058a3&filter[_id]=${id}`
-      )
-      .then(response => {
-        updateProduct(response);
-      })
-      .catch(error => console.log(error));
-  }
 
   useEffect(() => {
     items$.subscribe(_ => {
@@ -74,7 +58,7 @@ function App() {
         {!product.data ? null : (
           <Route
             path="/details/:id"
-            render={() => <Details product={product} addToCart={addToCart} />}
+            render={props => <Details {...props} product={product} />}
           />
         )}
         <Route path="/cart" component={Cart} />

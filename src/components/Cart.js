@@ -39,7 +39,7 @@ function postOrder(e, updateFinishOrder, info, Price) {
     List.push(product);
   });
 
-  stringify(List);
+  //stringify(List);
 
   axios
     .post(
@@ -76,13 +76,16 @@ function Cart() {
       ) : (
         <div className="Cart">
           <ul className="Cart__list">
-            {Object.keys(items$.value).map(key =>
-              listItem(items$.value[key], total, updateTotal)
-            )}
+            {items$.value
+              ? Object.keys(items$.value).map(key =>
+                  listItem(items$.value[key], total, updateTotal)
+                )
+              : null}
           </ul>
           <div className="Cart__orderInfo">
             <p className="Cart__orderInfo__text">total{total}</p>
           </div>
+
           <form
             className="Cart__form"
             onSubmit={e => {
