@@ -8,8 +8,7 @@ function Details(props) {
   const [product, updateProduct] = useState(null);
   //props.product.data.entries[0];
   //console.log
-  console.log(product);
-  console.log(props.match.params.id);
+
   useEffect(() => {
     axios
       .get(

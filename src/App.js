@@ -49,12 +49,9 @@ function App() {
           path="/"
           render={() => <Main searchItem={searchItem} checkbox={checkbox} />}
         />
-        {!product.data ? null : (
-          <Route
-            path="/details/:id"
-            render={props => <Details {...props} product={product} />}
-          />
-        )}
+
+        <Route path="/details/:id" render={props => <Details {...props} />} />
+
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} />
       </div>

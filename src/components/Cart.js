@@ -5,17 +5,8 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { stringify } from "querystring";
 
-function listItem(item, total, updateTotal) {
+function listItem(item) {
   let product = item.product;
-
-  console.log(items$.value);
-
-  console.log(item);
-
-  total = parseFloat(product.Price) * item.amount;
-  console.log(total);
-
-  //updateTotal(total);
 
   return (
     <li className="Cart__list__item" key={product._id}>
@@ -39,6 +30,7 @@ function postOrder(e, updateFinishOrder, info, Price) {
     List.push(product);
   });
 
+  console.log(List);
   //stringify(List);
 
   axios
@@ -66,8 +58,13 @@ function Cart() {
   const [finishOrder, updateFinishOrder] = useState(false);
   const [name, updateName] = useState("");
   const [adress, updateAdress] = useState("");
-  const [total, updateTotal] = useState(0);
-  const [itemArray, updateItemArray] = useState([]);
+  //const [total, updateTotal] = useState(0);
+
+  let total = 0;
+
+  Object.keys(items$.value).map(
+    key => (total += items$.value[key].product.Price * items$.value[key].amount)
+  );
 
   return (
     <>
@@ -78,12 +75,12 @@ function Cart() {
           <ul className="Cart__list">
             {items$.value
               ? Object.keys(items$.value).map(key =>
-                  listItem(items$.value[key], total, updateTotal)
+                  listItem(items$.value[key])
                 )
               : null}
           </ul>
           <div className="Cart__orderInfo">
-            <p className="Cart__orderInfo__text">total{total}</p>
+            <p className="Cart__orderInfo__text">total: ${total}</p>
           </div>
 
           <form
