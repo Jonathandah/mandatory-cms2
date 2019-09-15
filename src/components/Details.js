@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../css/Details.css";
 import { items$, updateItems } from "../store/cart-store";
+import Modal from "./Modal";
 import axios from "axios";
 
 function Details(props) {
   const [amount, updateAmount] = useState(1);
   const [product, updateProduct] = useState(null);
-  //props.product.data.entries[0];
-  //console.log
+  const [reviews, updateReviews] = useState([]);
+  const [showModal, updateShowModal] = useState(false);
 
   useEffect(() => {
     axios
@@ -21,6 +22,15 @@ function Details(props) {
       .then(response => {
         console.log(response);
         updateProduct(response.data.entries[0]);
+
+        axios
+          .get(
+            `http://localhost:8081/api/collections/get/Reviews?token=71576f2b35b3422c108c0e508058a3&filter[Product].[display]=${props.match.params.id}`
+          )
+          .then(res => {
+            console.log(res);
+            updateReviews(res.data.entries);
+          });
       })
       .catch(error => console.log(error));
   }, []);
@@ -77,7 +87,36 @@ function Details(props) {
             >
               Add to cart
             </button>
+            <div className="Details__body__container">
+              <h2 className="Details__body__container__title">Reviews</h2>
+              <button className="Details__body__container__showModal">
+                Add review
+              </button>
+              <ul className="Details__body__container__list">
+                {reviews.length > 0
+                  ? reviews.map(review => {
+                      return (
+                        <li
+                          className="Details__body__container__list__review"
+                          key={review._id}
+                        >
+                          <h3 className="Details__body__container__list__review__title">
+                            {review.Title}
+                          </h3>
+                          <p className="Details__body__container__list__review__info">
+                            {review.Rating}
+                          </p>
+                          <p className="Details__body__container__list__review__info">
+                            {review.Body}
+                          </p>
+                        </li>
+                      );
+                    })
+                  : null}
+              </ul>
+            </div>
           </main>
+          {showModal ? <Modal /> : null}
         </div>
       ) : null}
     </>
