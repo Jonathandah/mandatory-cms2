@@ -7,7 +7,6 @@ const Token = "71576f2b35b3422c108c0e508058a3";
 
 function Main(props) {
   const checkbox = props.checkbox;
-  const getProduct = props.getProduct;
   const searchItem = props.searchItem;
   const [products, updateProducts] = useState([]);
   const [page, updatePage] = useState(1);
@@ -58,7 +57,7 @@ function Main(props) {
       <p className="main__page">main side</p>
       <ul className="Main__list">
         {products.map(i => (
-          <Item key={i._id} product={i} getProduct={getProduct} />
+          <Item key={i._id} product={i} />
         ))}
       </ul>
       <div className="Main__pageContainer__button">

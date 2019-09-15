@@ -47,13 +47,7 @@ function App() {
         <Route
           exact
           path="/"
-          render={() => (
-            <Main
-              searchItem={searchItem}
-              getProduct={getProduct}
-              checkbox={checkbox}
-            />
-          )}
+          render={() => <Main searchItem={searchItem} checkbox={checkbox} />}
         />
         {!product.data ? null : (
           <Route

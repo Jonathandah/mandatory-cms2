@@ -4,7 +4,6 @@ import "../css/Item.css";
 
 function Item(props) {
   const product = props.product;
-  const getProduct = props.getProduct;
 
   return (
     <li className="Item">
@@ -16,12 +15,7 @@ function Item(props) {
       <h3 className="Item__name">{product.Name}</h3>
       <p className="Item__price">Price: {product.Price}$</p>
       <p className="Item__stock">Stock: {product.Stock}</p>
-      <Link
-        to={`/details/${product.Name}`}
-        onClick={() => getProduct(product._id)}
-      >
-        Go to..
-      </Link>
+      <Link to={`/details/${product.Name}`}>Go to..</Link>
     </li>
   );
 }
