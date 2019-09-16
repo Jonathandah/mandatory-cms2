@@ -34,12 +34,12 @@ function postOrder(e, updateFinishOrder, info, Price) {
   //stringify(List);
 
   axios
-    .post(cockpit__API.orders, {
+    .post(cockpit__API.postOrder, {
       data: {
         Name: info.name,
         Adress: info.adress,
         Price,
-        List
+        List: List.map(x => ({ value: x }))
       }
     })
     .then(response => {

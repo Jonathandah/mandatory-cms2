@@ -83,7 +83,7 @@ function Details(props) {
             >
               Add to cart
             </button>
-            <Review />
+            <Review {...props} product={product} />
             <div className="Details__body__container">
               <h2 className="Details__body__container__title">Reviews</h2>
               <ul className="Details__body__container__list">

@@ -4,12 +4,15 @@ const products = `http://localhost:8081/api/collections/get/Products?token=${tok
 
 const reviews = `http://localhost:8081/api/collections/get/Reviews?token=${token}`;
 
-const orders = `http://localhost:8081/api/collections/save/Orders?token=${token}`;
+const postReview = `http://localhost:8081/api/collections/save/Reviews?token=${token}`;
+
+const postOrder = `http://localhost:8081/api/collections/save/Orders?token=${token}`;
 
 const cockpit__API = {
   products,
   reviews,
-  orders
+  postOrder,
+  postReview
 };
 
 export default cockpit__API;
