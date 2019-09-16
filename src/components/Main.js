@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+import cockpit_API from "../constants/cockpit-api";
 import Item from "./Item";
 import { Link } from "react-router-dom";
 import "../css/Main.css";
 import axios from "axios";
-const Token = "71576f2b35b3422c108c0e508058a3";
 
 function Main(props) {
   const checkbox = props.checkbox;
@@ -17,15 +17,12 @@ function Main(props) {
     let regexStock = "";
     if (checkbox) regexStock = "^[1-9]d*";
     axios
-      .post(
-        `http://localhost:8081/api/collections/get/Products?limit=${5}&skip=${skip}&token=${Token}`,
-        {
-          filter: {
-            Name: { $regex: searchItem },
-            Stock: { $regex: regexStock }
-          }
+      .post(cockpit_API.products + `&limit=${5}&skip=${skip}`, {
+        filter: {
+          Name: { $regex: searchItem },
+          Stock: { $regex: regexStock }
         }
-      )
+      })
       .then(response => {
         console.log(response);
         updateTotal(response.data.total);

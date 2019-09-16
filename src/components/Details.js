@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../css/Details.css";
 import { items$, updateItems } from "../store/cart-store";
-import Modal from "./Modal";
+import Review from "./Review";
 import axios from "axios";
+import cockpit__API from "../constants/cockpit-api";
 
 function Details(props) {
   const [amount, updateAmount] = useState(1);
@@ -12,20 +13,15 @@ function Details(props) {
 
   useEffect(() => {
     axios
-      .get(
-        /*
-    cockpit__Api.products,
-    { filter: { id } }
-    */
-        `http://localhost:8081/api/collections/get/Products?token=71576f2b35b3422c108c0e508058a3&filter[Name]=${props.match.params.id}`
-      )
+      .get(cockpit__API.products + `&filter[Name]=${props.match.params.id}`)
       .then(response => {
         console.log(response);
         updateProduct(response.data.entries[0]);
 
         axios
           .get(
-            `http://localhost:8081/api/collections/get/Reviews?token=71576f2b35b3422c108c0e508058a3&filter[Product].[display]=${props.match.params.id}`
+            cockpit__API.reviews +
+              `&filter[Product].[display]=${props.match.params.id}`
           )
           .then(res => {
             console.log(res);
@@ -87,11 +83,9 @@ function Details(props) {
             >
               Add to cart
             </button>
+            <Review />
             <div className="Details__body__container">
               <h2 className="Details__body__container__title">Reviews</h2>
-              <button className="Details__body__container__showModal">
-                Add review
-              </button>
               <ul className="Details__body__container__list">
                 {reviews.length > 0
                   ? reviews.map(review => {
@@ -116,7 +110,6 @@ function Details(props) {
               </ul>
             </div>
           </main>
-          {showModal ? <Modal /> : null}
         </div>
       ) : null}
     </>

@@ -3,7 +3,7 @@ import "../css/Cart.css";
 import { items$, deleteItems } from "../store/cart-store";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-import { stringify } from "querystring";
+import cockpit__API from "../constants/cockpit-api";
 
 function listItem(item) {
   let product = item.product;
@@ -34,17 +34,14 @@ function postOrder(e, updateFinishOrder, info, Price) {
   //stringify(List);
 
   axios
-    .post(
-      "http://localhost:8081/api/collections/save/Orders?token=71576f2b35b3422c108c0e508058a3",
-      {
-        data: {
-          Name: info.name,
-          Adress: info.adress,
-          Price,
-          List
-        }
+    .post(cockpit__API.orders, {
+      data: {
+        Name: info.name,
+        Adress: info.adress,
+        Price,
+        List
       }
-    )
+    })
     .then(response => {
       console.log(response);
       deleteItems();

@@ -7,7 +7,6 @@ import Search from "./components/Search";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import { items$, updateItems } from "./store/cart-store";
-//import { cockpit__Api } from "./constants/cockpit-api";
 
 function App() {
   const [product, updateProduct] = useState({});
@@ -37,8 +36,10 @@ function App() {
           <Link to="/" className="App__header__title">
             Peachit
           </Link>
-          <Link to="/cart">Cart</Link>
-          <p className="App__header__cart">{cartAmount}</p>
+          <span className="App__header__container">
+            <Link to="/cart">Cart</Link>
+            <p className="App__header__cart">{cartAmount}</p>
+          </span>
           <Search
             updateCheckbox={updateCheckbox}
             updateSearchItem={updateSearchItem}
