@@ -5,18 +5,27 @@ import cockpit__API from "../constants/cockpit-api";
 import axios from "axios";
 
 function Review() {
-  const [rating, updateRating] = useState(0);
-  const [title, updateTitle] = useState("");
-  const [body, updateBody] = useState("");
+  const [Rating, updateRating] = useState(0);
+  const [Title, updateTitle] = useState("");
+  const [Body, updateBody] = useState("");
   function setRating(e) {
     console.log(e);
     updateRating(e);
   }
 
   function postReview() {
-    axios.post(cockpit__API.reviews, {}).then(response => {
-      console.log(response);
-    });
+    axios
+      .post(cockpit__API.reviews, {
+        data: {
+          Title,
+          Body,
+          Rating
+          //collectionlink
+        }
+      })
+      .then(response => {
+        console.log(response);
+      });
   }
 
   return (
@@ -29,17 +38,17 @@ function Review() {
           onChange={e => {
             updateTitle(e.target.value);
           }}
-          value={title}
+          value={Title}
         ></input>
         <p className="Review__form__text">Description: </p>
         <textarea
           onChange={e => {
             updateBody(e.target.value);
           }}
-          value={body}
+          value={Body}
         ></textarea>
         <p className="Review__form__text">Rating: </p>
-        <Rating onChange={e => setRating(e)} initialRating={rating}></Rating>
+        <Rating onChange={e => setRating(e)} initialRating={Rating}></Rating>
         <button className="Review__form__submit" type="submit">
           Submit
         </button>
