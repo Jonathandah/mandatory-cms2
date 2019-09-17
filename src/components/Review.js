@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Rating from "react-rating";
 import "../css/Review.css";
 import cockpit__API from "../constants/cockpit-api";
@@ -9,10 +9,7 @@ function Review(props) {
   const [title, updateTitle] = useState("");
   const [body, updateBody] = useState("");
 
-  function setRating(e) {
-    console.log(e);
-    updateNumber(e);
-  }
+  useEffect(() => {}, []);
 
   function postReview(e) {
     console.log(props.match.params.id);
@@ -31,7 +28,9 @@ function Review(props) {
         }
       })
       .then(response => {
-        console.log(response);
+        let copyReviews = [...props.reviews];
+        copyReviews.push(response.data);
+        props.updateReviews(copyReviews);
       });
   }
 
@@ -55,7 +54,7 @@ function Review(props) {
           value={body}
         ></textarea>
         <p className="Review__form__text">Rating: </p>
-        <Rating onChange={e => setRating(e)} initialRating={number}></Rating>
+        <Rating onChange={e => updateNumber(e)} initialRating={number}></Rating>
         <button className="Review__form__submit" type="submit">
           Submit
         </button>

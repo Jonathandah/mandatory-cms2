@@ -9,7 +9,25 @@ function Details(props) {
   const [amount, updateAmount] = useState(1);
   const [product, updateProduct] = useState(null);
   const [reviews, updateReviews] = useState([]);
-  const [showModal, updateShowModal] = useState(false);
+
+  function addItem() {
+    let item = {
+      product,
+      amount: parseInt(amount)
+    };
+    console.log("before", items$.value);
+    let copyCart = { ...items$.value };
+    if (copyCart[product.Name]) {
+      //om produkten finns
+      copyCart[product.Name].amount += item.amount;
+    } else {
+      //om produkten inte finns
+      copyCart[product.Name] = item;
+    }
+    updateItems(copyCart);
+    //addToCart(); // kan man använda useEffect isället?
+    console.log("after", items$.value);
+  }
 
   useEffect(() => {
     axios
@@ -52,38 +70,15 @@ function Details(props) {
               value={amount}
               onChange={e => updateAmount(e.target.value)}
             ></input>
-            <button
-              className="Details__body__add"
-              onClick={_ => {
-                let item = {
-                  product,
-                  amount: parseInt(amount)
-                };
-                console.log("before", items$.value);
-                if (items$.value) {
-                  let copyCart = { ...items$.value };
-                  if (copyCart[product.Name]) {
-                    //om produkten finns
-                    copyCart[product.Name].amount += item.amount;
-                  } else {
-                    //om produkten inte finns
-                    copyCart[product.Name] = item;
-                  }
-                  updateItems(copyCart);
-                  //addToCart(); // kan man använda useEffect isället?
-                } else {
-                  let obj = {};
-                  obj[product.Name] = item;
-                  updateItems(obj);
-                  //addToCart();
-                }
-
-                console.log("after", items$.value);
-              }}
-            >
+            <button className="Details__body__add" onClick={_ => addItem()}>
               Add to cart
             </button>
-            <Review {...props} product={product} />
+            <Review
+              {...props}
+              product={product}
+              reviews={reviews}
+              updateReviews={updateReviews}
+            />
             <div className="Details__body__container">
               <h2 className="Details__body__container__title">Reviews</h2>
               <ul className="Details__body__container__list">

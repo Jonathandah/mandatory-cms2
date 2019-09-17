@@ -59,9 +59,12 @@ function Cart() {
 
   let total = 0;
 
-  Object.keys(items$.value).map(
-    key => (total += items$.value[key].product.Price * items$.value[key].amount)
-  );
+  if (items$.value) {
+    Object.keys(items$.value).map(
+      key =>
+        (total += items$.value[key].product.Price * items$.value[key].amount)
+    );
+  }
 
   return (
     <>

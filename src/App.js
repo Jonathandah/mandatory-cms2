@@ -6,10 +6,9 @@ import Details from "./components/Details";
 import Search from "./components/Search";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
-import { items$, updateItems } from "./store/cart-store";
+import { items$ } from "./store/cart-store";
 
 function App() {
-  const [product, updateProduct] = useState({});
   const [searchItem, updateSearchItem] = useState("");
   const [checkbox, updateCheckbox] = useState(false);
   const [cartAmount, updateCartAmount] = useState(0);
@@ -37,7 +36,10 @@ function App() {
             Peachit
           </Link>
           <span className="App__header__container">
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart">
+              <i className="material-icons">shopping_cart</i>
+            </Link>
+
             <p className="App__header__cart">{cartAmount}</p>
           </span>
           <Search
