@@ -7,12 +7,13 @@ import cockpit__API from "../constants/cockpit-api";
 
 function listItem(item) {
   let product = item.product;
+  console.log(product);
 
   return (
     <li className="Cart__list__item" key={product._id}>
       <img
         className="Cart__list__item__image"
-        src={"http://localhost:8081/" + product.Image.path}
+        src={"http://localhost:8081/" + product.Image[0].path}
       />
       <h2 className="Cart__list__item__name">{product.Name}</h2>
       <p className="Cart__list__item__total">Price: {product.Price}</p>
@@ -81,7 +82,7 @@ function Cart(props) {
               : null}
           </ul>
           <div className="Cart__orderInfo">
-            <p className="Cart__orderInfo__text">total: ${total}</p>
+            <p className="Cart__orderInfo__text">total: {total}$</p>
           </div>
 
           <form

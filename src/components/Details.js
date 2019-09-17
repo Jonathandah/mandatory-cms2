@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Carousel } from "react-responsive-carousel";
 import "../css/Details.css";
 import { items$, updateItems } from "../store/cart-store";
 import Review from "./Review";
 import axios from "axios";
 import cockpit__API from "../constants/cockpit-api";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Details(props) {
   const [amount, updateAmount] = useState(1);
@@ -54,10 +56,18 @@ function Details(props) {
       {product ? (
         <div className="Details">
           <main className="Details__body">
-            <img
-              className="Details__body__image"
-              src={"http://localhost:8081/" + product.Image.path}
-            />
+            <Carousel>
+              {product.Image.map(x => {
+                return (
+                  <div key={x.path}>
+                    <img
+                      className="Details__body__image"
+                      src={"http://localhost:8081/" + x.path}
+                    />
+                  </div>
+                );
+              })}
+            </Carousel>
             <div className="Details__body__box">
               <h2 className="Details__body__box__title">{product.Name}</h2>
               <span className="Details__body__box__container">

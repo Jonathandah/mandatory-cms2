@@ -5,11 +5,13 @@ import "../css/Item.css";
 function Item(props) {
   const product = props.product;
 
+  console.log(props.product);
+
   return (
     <li className="Item">
       <Link to={`/details/${product.Name}`} className="Item__link">
         <img
-          src={"http://localhost:8081/" + product.Image.path}
+          src={"http://localhost:8081/" + product.Image[0].path}
           allt={`this is a ${product.Name}`}
           className="Item__link__image"
         />

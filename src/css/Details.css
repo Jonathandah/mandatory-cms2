@@ -43,11 +43,11 @@
 .Details__body__box__container__add {
   background: #0d51ff;
   color: white;
-  width: 30%;
-  height: 40%;
+  width: 40%;
+  height: 50px;
   font-family: unset;
   font-weight: 600;
-  font-size: 122%;
+  font-size: 100%;
   margin: 2%;
   border: none;
 }

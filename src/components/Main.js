@@ -4,10 +4,12 @@ import Item from "./Item";
 import { Link } from "react-router-dom";
 import "../css/Main.css";
 import axios from "axios";
+let limit = 8;
 
 function Main(props) {
   const checkbox = props.checkbox;
   const searchItem = props.searchItem;
+
   const [products, updateProducts] = useState([]);
   const [page, updatePage] = useState(1);
   const [skip, updateSkip] = useState(0);
@@ -17,7 +19,7 @@ function Main(props) {
     let regexStock = "";
     if (checkbox) regexStock = "^[1-9]d*";
     axios
-      .post(cockpit_API.products + `&limit=${5}&skip=${skip}`, {
+      .post(cockpit_API.products + `&limit=${limit}&skip=${skip}`, {
         filter: {
           Name: { $regex: searchItem },
           Stock: { $regex: regexStock }
@@ -37,20 +39,20 @@ function Main(props) {
 
   function pagination(e) {
     if (e.target.textContent === "next") {
-      if (skip + 5 < total) {
-        updateSkip(skip + 5);
+      if (skip + limit < total) {
+        updateSkip(skip + limit);
         updatePage(page + 1);
       }
     } else {
       if (skip >= total || skip > 0) {
-        updateSkip(skip - 5);
+        updateSkip(skip - limit);
         updatePage(page - 1);
       }
     }
   }
 
   return (
-    <div className="Main">
+    <>
       <header className="Main__header">
         <iframe
           src="https://giphy.com/embed/Aps6kmwB51qF2"
@@ -59,31 +61,33 @@ function Main(props) {
           allowFullScreen
         ></iframe>
       </header>
-      <ul className="Main__list">
-        {products.map(i => (
-          <Item key={i._id} product={i} />
-        ))}
-      </ul>
-      <div className="Main__pageContainer__button">
-        <button
-          className="Main__pageContainer__button"
-          onClick={e => {
-            pagination(e);
-          }}
-        >
-          previous
-        </button>
-        <p className="Main__pageContainer__indicator">{page}</p>
-        <button
-          className="Main__pageContainer__button"
-          onClick={e => {
-            pagination(e);
-          }}
-        >
-          next
-        </button>
+      <div className="Main">
+        <ul className="Main__list">
+          {products.map(i => (
+            <Item key={i._id} product={i} />
+          ))}
+        </ul>
+        <div className="Main__pageContainer__button">
+          <button
+            className="Main__pageContainer__button"
+            onClick={e => {
+              pagination(e);
+            }}
+          >
+            previous
+          </button>
+          <p className="Main__pageContainer__indicator">{page}</p>
+          <button
+            className="Main__pageContainer__button"
+            onClick={e => {
+              pagination(e);
+            }}
+          >
+            next
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
