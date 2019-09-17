@@ -4,7 +4,6 @@ import { items$, updateItems } from "../store/cart-store";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import cockpit__API from "../constants/cockpit-api";
-let total = 0;
 
 function listItem(item) {
   let product = item.product;
@@ -24,37 +23,38 @@ function listItem(item) {
   );
 }
 
-function postOrder(updateFinishOrder, info, Price) {
-  //api for posting order to cockpit
-  let List = [];
-  Object.keys(items$.value).map(key => {
-    let product = items$.value[key];
-    List.push(product);
-  });
-
-  axios
-    .post(cockpit__API.postOrder, {
-      data: {
-        Name: info.name,
-        Adress: info.adress,
-        Price,
-        List: List.map(x => ({ value: x }))
-      }
-    })
-    .then(response => {
-      console.log(response);
-      updateItems();
-    });
-
-  updateFinishOrder(true);
-}
-
 function Cart(props) {
+  let total = 0;
+
   const finishOrder = props.finishOrder;
   const updateFinishOrder = props.updateFinishOrder;
-
   const [name, updateName] = useState("");
   const [adress, updateAdress] = useState("");
+
+  function postOrder() {
+    //api for posting order to cockpit
+    let List = [];
+    Object.keys(items$.value).map(key => {
+      let product = items$.value[key];
+      List.push(product);
+    });
+
+    axios
+      .post(cockpit__API.postOrder, {
+        data: {
+          Name: name,
+          Adress: adress,
+          Price: total,
+          List: List.map(x => ({ value: x }))
+        }
+      })
+      .then(response => {
+        console.log(response);
+        updateItems();
+      });
+
+    updateFinishOrder(true);
+  }
 
   if (items$.value) {
     Object.keys(items$.value).map(
@@ -85,7 +85,7 @@ function Cart(props) {
             onSubmit={e => {
               e.preventDefault();
               if (items$.value) {
-                postOrder(e, updateFinishOrder, { name, adress }, total);
+                postOrder();
               }
             }}
           >
