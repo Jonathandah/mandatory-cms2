@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../css/Cart.css";
-import { items$, deleteItems } from "../store/cart-store";
+import { items$, updateItems } from "../store/cart-store";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import cockpit__API from "../constants/cockpit-api";
@@ -44,15 +44,16 @@ function postOrder(e, updateFinishOrder, info, Price) {
     })
     .then(response => {
       console.log(response);
-      deleteItems();
+      updateItems();
     });
 
-  e.preventDefault();
   updateFinishOrder(true);
 }
 
-function Cart() {
-  const [finishOrder, updateFinishOrder] = useState(false);
+function Cart(props) {
+  const finishOrder = props.finishOrder;
+  const updateFinishOrder = props.updateFinishOrder;
+
   const [name, updateName] = useState("");
   const [adress, updateAdress] = useState("");
   //const [total, updateTotal] = useState(0);
@@ -86,7 +87,10 @@ function Cart() {
           <form
             className="Cart__form"
             onSubmit={e => {
-              postOrder(e, updateFinishOrder, { name, adress }, total);
+              e.preventDefault();
+              if (items$.value) {
+                postOrder(e, updateFinishOrder, { name, adress }, total);
+              }
             }}
           >
             <p className="Cart__form__text">Name</p>

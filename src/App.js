@@ -12,21 +12,21 @@ function App() {
   const [searchItem, updateSearchItem] = useState("");
   const [checkbox, updateCheckbox] = useState(false);
   const [cartAmount, updateCartAmount] = useState(0);
+  const [finishOrder, updateFinishOrder] = useState(false);
 
   useEffect(() => {
-    items$.subscribe(_ => {
-      addToCart();
+    console.log("effect for items");
+    items$.subscribe(cart => {
+      console.log(cart);
+
+      if (cart) {
+        updateCartAmount(Object.keys(items$.value).length);
+      } else {
+        updateCartAmount(0);
+        console.log("items undefined");
+      }
     });
-  });
-
-  function addToCart() {
-    let number = 0;
-
-    for (let _ in items$.value) {
-      number++;
-      updateCartAmount(number);
-    }
-  }
+  }, []);
 
   return (
     <Router>
@@ -55,7 +55,15 @@ function App() {
 
         <Route path="/details/:id" render={props => <Details {...props} />} />
 
-        <Route path="/cart" component={Cart} />
+        <Route
+          path="/cart"
+          render={() => (
+            <Cart
+              updateFinishOrder={updateFinishOrder}
+              finishOrder={finishOrder}
+            />
+          )}
+        />
         <Route path="/checkout" component={Checkout} />
       </div>
     </Router>

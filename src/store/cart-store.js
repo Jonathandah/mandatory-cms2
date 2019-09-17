@@ -13,7 +13,3 @@ export function updateItems(newItem) {
 
   items$.next(newItem);
 }
-
-export function deleteItems() {
-  window.localStorage.removeItem("items");
-}
