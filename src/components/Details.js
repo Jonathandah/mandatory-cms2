@@ -17,7 +17,6 @@ function Details(props) {
       product,
       amount: parseInt(amount)
     };
-    console.log("before", items$.value);
     let copyCart = { ...items$.value };
     if (copyCart[product.Name]) {
       //om produkten finns
@@ -27,8 +26,6 @@ function Details(props) {
       copyCart[product.Name] = item;
     }
     updateItems(copyCart);
-    //addToCart(); // kan man använda useEffect isället?
-    console.log("after", items$.value);
   }
 
   useEffect(() => {
@@ -44,7 +41,6 @@ function Details(props) {
               `&filter[Product].[display]=${props.match.params.id}`
           )
           .then(res => {
-            console.log(res);
             updateReviews(res.data.entries);
           });
       })

@@ -15,15 +15,11 @@ function App() {
   const [finishOrder, updateFinishOrder] = useState(false);
 
   useEffect(() => {
-    console.log("effect for items");
     items$.subscribe(cart => {
-      console.log(cart);
-
       if (cart) {
         updateCartAmount(Object.keys(items$.value).length);
       } else {
         updateCartAmount(0);
-        console.log("items undefined");
       }
     });
   }, []);
@@ -72,11 +68,3 @@ function App() {
 }
 
 export default App;
-/*
-          <iframe
-            src="https://giphy.com/embed/Aps6kmwB51qF2"
-            frameBorder="0"
-            className="giphy-embed App__header__frame"
-            allowFullScreen
-          ></iframe>
-           */

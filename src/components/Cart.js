@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../css/Cart.css";
 import { items$, updateItems } from "../store/cart-store";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import cockpit__API from "../constants/cockpit-api";
+let total = 0;
 
 function listItem(item) {
   let product = item.product;
@@ -23,16 +24,13 @@ function listItem(item) {
   );
 }
 
-function postOrder(e, updateFinishOrder, info, Price) {
+function postOrder(updateFinishOrder, info, Price) {
   //api for posting order to cockpit
   let List = [];
   Object.keys(items$.value).map(key => {
     let product = items$.value[key];
     List.push(product);
   });
-
-  console.log(List);
-  //stringify(List);
 
   axios
     .post(cockpit__API.postOrder, {
@@ -57,9 +55,6 @@ function Cart(props) {
 
   const [name, updateName] = useState("");
   const [adress, updateAdress] = useState("");
-  //const [total, updateTotal] = useState(0);
-
-  let total = 0;
 
   if (items$.value) {
     Object.keys(items$.value).map(

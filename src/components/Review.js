@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Rating from "react-rating";
 import "../css/Review.css";
 import cockpit__API from "../constants/cockpit-api";
@@ -8,8 +8,6 @@ function Review(props) {
   const [number, updateNumber] = useState(0);
   const [title, updateTitle] = useState("");
   const [body, updateBody] = useState("");
-
-  useEffect(() => {}, []);
 
   function postReview(e) {
     console.log(props.match.params.id);

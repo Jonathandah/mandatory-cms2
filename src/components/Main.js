@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import cockpit_API from "../constants/cockpit-api";
 import Item from "./Item";
-import { Link } from "react-router-dom";
 import "../css/Main.css";
 import axios from "axios";
 let limit = 8;
