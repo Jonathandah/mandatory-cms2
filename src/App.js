@@ -38,9 +38,13 @@ function App() {
             />
             <span className="App__header__box__container">
               <Link to="/cart">
-                <i className="material-icons">shopping_cart</i>
+                <i className="material-icons App__header__box__icon">
+                  shopping_cart
+                </i>
               </Link>
-              <p className="App__header__box__cart">{cartAmount}</p>
+              <p className="App__header__box__container__number">
+                {cartAmount}
+              </p>
             </span>
           </div>
         </header>

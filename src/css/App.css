@@ -31,4 +31,12 @@
   text-decoration: none;
 }
 
+.App__header__box__icon {
+  font-size: 400%;
+  color: #2b2a2a;
+}
+.App__header__box__container__number {
+  border-radius: 50%;
+}
+
 /*font-family: 'Noto Serif', serif;*/
