@@ -61,7 +61,7 @@ function Details(props) {
             <div className="Details__body__box">
               <h2 className="Details__body__box__title">{product.Name}</h2>
               <span className="Details__body__box__container">
-                <p className="Details__body__box__price">{product.Price}</p>
+                <p className="Details__body__box__price">{product.Price}$</p>
                 <p className="Details__body__box__stock">
                   Stock: {product.Stock}
                 </p>
@@ -69,20 +69,22 @@ function Details(props) {
                   {product.Description}
                 </p>
               </span>
-              <input
-                className="Details__body__box__input"
-                type="number"
-                name="quantity"
-                min="1"
-                value={amount}
-                onChange={e => updateAmount(e.target.value)}
-              ></input>
-              <button
-                className="Details__body__box__add"
-                onClick={_ => addItem()}
-              >
-                Add to cart
-              </button>
+              <span className="Details__body__box__container--inputs">
+                <input
+                  className="Details__body__box__container__input"
+                  type="number"
+                  name="quantity"
+                  min="1"
+                  value={amount}
+                  onChange={e => updateAmount(e.target.value)}
+                ></input>
+                <button
+                  className="Details__body__box__container__add"
+                  onClick={_ => addItem()}
+                >
+                  ADD TO CART
+                </button>
+              </span>
             </div>
           </main>
           <Review
