@@ -1,4 +1,6 @@
 .Main {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 }
@@ -6,4 +8,15 @@
 .Main__list {
   display: flex;
   flex-direction: row;
+}
+
+.Main__header {
+  width: 100%;
+  height: 80%;
+}
+
+.Main__header__frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }

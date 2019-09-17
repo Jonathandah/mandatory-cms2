@@ -53,58 +53,69 @@ function Details(props) {
     <>
       {product ? (
         <div className="Details">
-          <p className="Details__page">Details</p>
           <main className="Details__body">
             <img
               className="Details__body__image"
               src={"http://localhost:8081/" + product.Image.path}
             />
-            <h2 className="Details__body__title">{product.Name}</h2>
-            <p className="Details__body__price">{product.Price}</p>
-            <p className="Details__body__stock">Stock: {product.Stock}</p>
-            <p className="Details__body__description">{product.Description}</p>
-            <input
-              type="number"
-              name="quantity"
-              min="1"
-              value={amount}
-              onChange={e => updateAmount(e.target.value)}
-            ></input>
-            <button className="Details__body__add" onClick={_ => addItem()}>
-              Add to cart
-            </button>
-            <Review
-              {...props}
-              product={product}
-              reviews={reviews}
-              updateReviews={updateReviews}
-            />
-            <div className="Details__body__container">
-              <h2 className="Details__body__container__title">Reviews</h2>
-              <ul className="Details__body__container__list">
-                {reviews.length > 0
-                  ? reviews.map(review => {
-                      return (
-                        <li
-                          className="Details__body__container__list__review"
-                          key={review._id}
-                        >
-                          <h3 className="Details__body__container__list__review__title">
-                            {review.Title}
-                          </h3>
-                          <p className="Details__body__container__list__review__info">
-                            {review.Rating}
-                          </p>
-                          <p className="Details__body__container__list__review__info">
-                            {review.Body}
-                          </p>
-                        </li>
-                      );
-                    })
-                  : null}
-              </ul>
+            <div className="Details__body__box">
+              <h2 className="Details__body__box__title">{product.Name}</h2>
+              <span className="Details__body__box__container">
+                <p className="Details__body__box__price">{product.Price}</p>
+                <p className="Details__body__box__stock">
+                  Stock: {product.Stock}
+                </p>
+                <p className="Details__body__box__description">
+                  {product.Description}
+                </p>
+              </span>
+              <input
+                className="Details__body__box__input"
+                type="number"
+                name="quantity"
+                min="1"
+                value={amount}
+                onChange={e => updateAmount(e.target.value)}
+              ></input>
+              <button
+                className="Details__body__box__add"
+                onClick={_ => addItem()}
+              >
+                Add to cart
+              </button>
             </div>
           </main>
+          <Review
+            {...props}
+            product={product}
+            reviews={reviews}
+            updateReviews={updateReviews}
+          />
+          <div className="Details__body__container">
+            <h2 className="Details__body__container__title">Reviews</h2>
+            <ul className="Details__body__container__list">
+              {reviews.length > 0
+                ? reviews.map(review => {
+                    return (
+                      <li
+                        className="Details__body__container__list__review"
+                        key={review._id}
+                      >
+                        <h3 className="Details__body__container__list__review__title">
+                          {review.Title}
+                        </h3>
+                        <p className="Details__body__container__list__review__info">
+                          {review.Rating}
+                        </p>
+                        <p className="Details__body__container__list__review__info">
+                          {review.Body}
+                        </p>
+                      </li>
+                    );
+                  })
+                : null}
+            </ul>
+          </div>
         </div>
       ) : null}
     </>

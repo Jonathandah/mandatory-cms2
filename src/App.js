@@ -32,20 +32,21 @@ function App() {
     <Router>
       <div className="App">
         <header className="App__header">
-          <Link to="/" className="App__header__title">
-            Peachit
-          </Link>
-          <span className="App__header__container">
-            <Link to="/cart">
-              <i className="material-icons">shopping_cart</i>
+          <div className="App__header__box">
+            <Link to="/" className="App__header__box__title">
+              Send It
             </Link>
-
-            <p className="App__header__cart">{cartAmount}</p>
-          </span>
-          <Search
-            updateCheckbox={updateCheckbox}
-            updateSearchItem={updateSearchItem}
-          />
+            <Search
+              updateCheckbox={updateCheckbox}
+              updateSearchItem={updateSearchItem}
+            />
+            <span className="App__header__box__container">
+              <Link to="/cart">
+                <i className="material-icons">shopping_cart</i>
+              </Link>
+              <p className="App__header__box__cart">{cartAmount}</p>
+            </span>
+          </div>
         </header>
         <Route
           exact
@@ -71,3 +72,11 @@ function App() {
 }
 
 export default App;
+/*
+          <iframe
+            src="https://giphy.com/embed/Aps6kmwB51qF2"
+            frameBorder="0"
+            className="giphy-embed App__header__frame"
+            allowFullScreen
+          ></iframe>
+           */

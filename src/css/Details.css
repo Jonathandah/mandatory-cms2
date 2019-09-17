@@ -1,8 +1,33 @@
 .Details {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
+.Details__body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Details__body__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 75%;
+}
 .Details__body__image {
   width: 25%;
+}
+
+.Details__body__box__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 50%;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
 }

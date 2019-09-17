@@ -51,7 +51,14 @@ function Main(props) {
 
   return (
     <div className="Main">
-      <p className="main__page">main side</p>
+      <header className="Main__header">
+        <iframe
+          src="https://giphy.com/embed/Aps6kmwB51qF2"
+          frameBorder="0"
+          className="giphy-embed Main__header__frame"
+          allowFullScreen
+        ></iframe>
+      </header>
       <ul className="Main__list">
         {products.map(i => (
           <Item key={i._id} product={i} />
