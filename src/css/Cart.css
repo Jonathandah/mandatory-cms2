@@ -13,3 +13,34 @@
   margin-left: 5%;
   border-block-end: inherit;
 }
+
+.stressigt {
+  height: 500px;
+  justify-content: center;
+  margin: 5%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid black;
+}
+
+.Cart__orderInfo__text {
+  font-weight: 900;
+}
+
+.Cart__orderInfo {
+  width: 231px;
+}
+
+.Cart__form__submit {
+  background: #0d51ff;
+  color: white;
+  width: 100px;
+  height: 50px;
+  font-family: unset;
+  font-weight: 600;
+  font-size: 100%;
+  margin: 2%;
+  border: none;
+}

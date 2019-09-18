@@ -76,43 +76,45 @@ function Cart(props) {
                 )
               : null}
           </ul>
-          <div className="Cart__orderInfo">
-            <p className="Cart__orderInfo__text">total: {total}$</p>
-          </div>
+          <div className="stressigt">
+            <div className="Cart__orderInfo">
+              <p className="Cart__orderInfo__text">total: {total}$</p>
+            </div>
 
-          <form
-            className="Cart__form"
-            onSubmit={e => {
-              e.preventDefault();
-              if (items$.value) {
-                postOrder();
-              }
-            }}
-          >
-            <p className="Cart__form__text">Name</p>
-            <input
-              className="Cart__form__input"
-              typ="text"
-              onChange={e => {
-                updateName(e.target.value);
+            <form
+              className="Cart__form"
+              onSubmit={e => {
+                e.preventDefault();
+                if (items$.value) {
+                  postOrder();
+                }
               }}
-              value={name}
-              required
-            />
-            <p className="Cart__form__text">Adress</p>
-            <input
-              className="Cart__form__input"
-              typ="text"
-              onChange={e => {
-                updateAdress(e.target.value);
-              }}
-              value={adress}
-              required
-            />
-            <button className="Cart__form__submit" type="submit">
-              Confirm
-            </button>
-          </form>
+            >
+              <p className="Cart__form__text">Name</p>
+              <input
+                className="Cart__form__input"
+                typ="text"
+                onChange={e => {
+                  updateName(e.target.value);
+                }}
+                value={name}
+                required
+              />
+              <p className="Cart__form__text">Adress</p>
+              <input
+                className="Cart__form__input"
+                typ="text"
+                onChange={e => {
+                  updateAdress(e.target.value);
+                }}
+                value={adress}
+                required
+              />
+              <button className="Cart__form__submit" type="submit">
+                Confirm
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </>
