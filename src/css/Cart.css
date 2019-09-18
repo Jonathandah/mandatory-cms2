@@ -1,3 +1,15 @@
 .Cart__list__item__image {
   width: 10%;
 }
+
+.Cart__list {
+  padding: 0px;
+}
+
+.Cart__list__item {
+  list-style: none;
+  border: 1px solid black;
+  width: 90%;
+  margin-left: 5%;
+  border-block-end: inherit;
+}

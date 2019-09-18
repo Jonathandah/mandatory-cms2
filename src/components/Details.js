@@ -5,6 +5,7 @@ import { items$, updateItems } from "../store/cart-store";
 import Review from "./Review";
 import axios from "axios";
 import cockpit__API from "../constants/cockpit-api";
+import Rating from "react-rating";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Details(props) {
@@ -100,7 +101,6 @@ function Details(props) {
             updateReviews={updateReviews}
           />
           <div className="Details__body__container">
-            <h2 className="Details__body__container__title">Reviews</h2>
             <ul className="Details__body__container__list">
               {reviews.length > 0
                 ? reviews.map(review => {
@@ -112,9 +112,7 @@ function Details(props) {
                         <h3 className="Details__body__container__list__review__title">
                           {review.Title}
                         </h3>
-                        <p className="Details__body__container__list__review__info">
-                          {review.Rating}
-                        </p>
+                        <Rating initialRating={review.Rating}></Rating>
                         <p className="Details__body__container__list__review__info">
                           {review.Body}
                         </p>

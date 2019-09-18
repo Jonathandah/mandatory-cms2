@@ -55,3 +55,14 @@
 .Details__body__box__container__add:hover {
   cursor: pointer;
 }
+
+.Details__body__container__list__review {
+  height: 300px;
+  list-style: none;
+  box-shadow: 0px 20px 50px -12px rgba(0, 0, 0, 0.25);
+  margin-top: 50px;
+}
+
+.Details__body__container__list {
+  padding: 0px;
+}

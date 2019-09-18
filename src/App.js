@@ -37,14 +37,14 @@ function App() {
               updateSearchItem={updateSearchItem}
             />
             <span className="App__header__box__container">
+              <p className="App__header__box__container__number">
+                {cartAmount > 0 ? cartAmount : null}
+              </p>
               <Link to="/cart">
-                <i className="material-icons App__header__box__icon">
+                <i className="material-icons App__header__box__container__icon">
                   shopping_cart
                 </i>
               </Link>
-              <p className="App__header__box__container__number">
-                {cartAmount}
-              </p>
             </span>
           </div>
         </header>

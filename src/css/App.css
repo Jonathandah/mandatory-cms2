@@ -31,12 +31,27 @@
   text-decoration: none;
 }
 
-.App__header__box__icon {
+.App__header__box__container {
+  width: 8%;
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App__header__box__container__icon {
   font-size: 400%;
   color: #2b2a2a;
 }
 .App__header__box__container__number {
-  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  top: 31px;
+  position: relative;
 }
 
 /*font-family: 'Noto Serif', serif;*/

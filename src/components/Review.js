@@ -44,15 +44,18 @@ function Review(props) {
           }}
           value={title}
         ></input>
+        <p className="Review__form__text">Rating: </p>
+        <Rating onChange={e => updateNumber(e)} initialRating={number}></Rating>
         <p className="Review__form__text">Description: </p>
         <textarea
+          className="Review__form__description"
           onChange={e => {
             updateBody(e.target.value);
           }}
+          rows="30"
           value={body}
         ></textarea>
-        <p className="Review__form__text">Rating: </p>
-        <Rating onChange={e => updateNumber(e)} initialRating={number}></Rating>
+
         <button className="Review__form__submit" type="submit">
           Submit
         </button>
